@@ -13,7 +13,7 @@ from langchain_core.messages import HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain_tavily import TavilySearch
 
 # --- LangGraph Imports ---
 from langgraph.graph import StateGraph, START, END, MessagesState
@@ -98,8 +98,19 @@ def search_web(query: str) -> str:
     """搜尋網際網路以獲取最新新聞或一般知識。"""
     print(f"   🔧 [Tool: Web] 上網搜尋: {query}")
     try:
-        tool = TavilySearchResults(k=3)
-        return tool.invoke(query)
+        search_tool = TavilySearch(max_results=3)
+        # TavilySearch 的 invoke 方法接受字串查詢
+        results = search_tool.invoke(query)
+        # 格式化結果為字串
+        if isinstance(results, list):
+            response_text = ""
+            for res in results:
+                if isinstance(res, dict):
+                    response_text += f"- 來源: {res.get('url', 'N/A')}\n  內容: {res.get('content', res.get('snippet', 'N/A'))}\n\n"
+                else:
+                    response_text += f"{res}\n\n"
+            return response_text.strip()
+        return str(results)
     except Exception as e:
         return f"搜尋錯誤: {e}"
 
