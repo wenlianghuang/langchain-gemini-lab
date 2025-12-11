@@ -15,4 +15,7 @@ dependencies = [
     "langchain-tavily>=0.2.13",
     "tavily-python>=0.7.14",
     "yfinance>=0.2.66",
+    "langgraph>=1.0.4",
+    "langchain-groq>=1.1.0",
+    "grandalf>=0.8",
 ]
