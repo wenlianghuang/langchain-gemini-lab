@@ -18,4 +18,7 @@ dependencies = [
     "langgraph>=1.0.4",
     "langchain-groq>=1.1.0",
     "grandalf>=0.8",
+    "langserve[all]>=0.3.3",
+    "fastapi>=0.124.2",
+    "uvicorn>=0.38.0",
 ]
