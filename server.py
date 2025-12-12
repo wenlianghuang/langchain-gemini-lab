@@ -231,5 +231,8 @@ add_routes(
 
 if __name__ == "__main__":
     print("\n🚀 Server 啟動中...")
-    print("👉 請重新整理瀏覽器: http://localhost:8000/agent/playground/")
+    print("👉 LangServe Playground: http://localhost:8000/agent/playground/")
+    print("👉 前端應用: http://localhost:3000")
+    print("👉 API 端點: http://localhost:8000/agent")
+    print("👉 流式端點: http://localhost:8000/agent/stream")
     uvicorn.run(app, host="0.0.0.0", port=8000)
