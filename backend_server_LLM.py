@@ -254,31 +254,31 @@ add_routes(
 )
 
 # 添加调试端点，用于测试流式响应
-@app.get("/debug/stream-test")
-async def debug_stream_test():
-    """测试流式响应格式"""
-    from fastapi.responses import StreamingResponse
-    import json
-    
-    async def generate():
-        # 模拟 LangServe 的流式响应格式
-        test_data = {
-            "event": "data",
-            "data": {
-                "output": {
-                    "messages": [
-                        {
-                            "type": "ai",
-                            "content": "这是一条测试消息",
-                            "id": "test-1"
-                        }
-                    ]
-                }
-            }
-        }
-        yield f"data: {json.dumps(test_data)}\n\n"
-    
-    return StreamingResponse(generate(), media_type="text/event-stream")
+# @app.get("/debug/stream-test")
+# async def debug_stream_test():
+#     """测试流式响应格式"""
+#     from fastapi.responses import StreamingResponse
+#     import json
+#     
+#     async def generate():
+#         # 模拟 LangServe 的流式响应格式
+#         test_data = {
+#             "event": "data",
+#             "data": {
+#                 "output": {
+#                     "messages": [
+#                         {
+#                             "type": "ai",
+#                             "content": "这是一条测试消息",
+#                             "id": "test-1"
+#                         }
+#                     ]
+#                 }
+#             }
+#         }
+#         yield f"data: {json.dumps(test_data)}\n\n"
+#     
+#     return StreamingResponse(generate(), media_type="text/event-stream")
 
 if __name__ == "__main__":
     print("\n🚀 Server 啟動中...")
